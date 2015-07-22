@@ -122,9 +122,6 @@ MonoBehaviour:
   eatCauldronButton: {fileID: 1615081862}
   blockTrackButton: {fileID: 614480286}
   backButtom: {fileID: 1705632909}
-  plusstamina: 0
-  plusweight: 0
-  plusmusclel: 0
 --- !u!114 &70125146
 MonoBehaviour:
   m_ObjectHideFlags: 0

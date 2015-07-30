@@ -3,7 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 	
 public class stratjanken : MonoBehaviour {
-		
+	public Text timetext;
+	public double gettime , totaltime;	
 	public bool flgJanken;
 	//int modeJanken = 0;　// jankenの状態を管理する
 
@@ -22,8 +23,23 @@ public class stratjanken : MonoBehaviour {
 		
 	int flgResult; //勝敗結果を保持
 
-	public void start(){
+	public void Start(){
 		flgJanken = false;
+		totaltime = 10;
+	}
+
+	void Update () {
+		gettime=Time.deltaTime;
+		if (totaltime >= 0) {
+			totaltime = totaltime - gettime;
+			timetext.text = totaltime.ToString ("N0");
+			if(totaltime<=0){
+				flgJanken = false;
+				myhand = STONE;
+				judge();
+			}
+		}
+		
 	}
 		
 	public void StartJankenbutton(){

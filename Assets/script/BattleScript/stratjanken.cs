@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using UnityEngine.UI;
 	
 public class stratjanken : MonoBehaviour {
-	public Text timetext;
+	public Text timetext,hpText,cpuHpText;
 	public double gettime , totaltime;	
 	public bool flgJanken;
-	//int modeJanken = 0;　// jankenの状態を管理する
+	//teisuu
+	const String WEIGHT = "WEIGHT";
+	const String POWER = "POWER";
+	const String STAMINA = "STAMINA";
+	const String MONEY = "MONEY";
 
 	public GameObject startjankenobj;
 		
@@ -18,13 +23,52 @@ public class stratjanken : MonoBehaviour {
 	const int WIN = 5;
 	const int LOOSE = 6;
 		
-	int myhand;
+	public int myhand;
 	int comhand;
+	//myStatus
+	int weight;
+	int power;
+	int stamina;
+	int money;
+	//
+	int cpuWeight;
+	int cpuPower;
+	int cpuStamina;
+	int cpuMoney;
 		
 	int flgResult; //勝敗結果を保持
 
 	public void Start(){
-		flgJanken = false;
+		flgJanken = true;
+		//clickGrowStartButton getStatus = GetComponent<clickGrowStartButton> ();
+		//gameprefsからデータをロード
+		stamina = LoadStamina();
+		power  = LoadPower();
+		weight = LoadWeight();
+		money = LoadMoney();
+		Debug.Log ("Weight:" + weight);
+		Debug.Log ("Stamina:" + stamina);
+		Debug.Log ("Power:" + power);
+		Debug.Log ("Money:" + money);
+
+
+
+		//
+		kindRikishi rikishi = new kindRikishi ();
+		cpuWeight = rikishi.Weight ();
+		cpuPower = rikishi.Power();
+		cpuStamina = rikishi.Stamina ();
+		cpuMoney = rikishi.Money ();
+		Debug.Log ("cpuWeight:"+cpuWeight);
+		Debug.Log ("cpuPower:"+cpuPower);
+		Debug.Log ("cpuStamina:"+cpuStamina);
+		Debug.Log ("cpuMoney:"+cpuMoney);
+
+		//
+		hpText.text = "自分のHP："+stamina.ToString ();
+		cpuHpText.text = "相手のHP："+cpuStamina.ToString ();
+
+		//
 		totaltime = 10;
 	}
 
@@ -39,6 +83,10 @@ public class stratjanken : MonoBehaviour {
 				judge();
 			}
 		}
+
+		//
+		hpText.text = "自分のHP："+stamina.ToString ();
+		cpuHpText.text = "相手のHP："+cpuStamina.ToString ();
 		
 	}
 		
@@ -72,7 +120,8 @@ public class stratjanken : MonoBehaviour {
 	}
 
 	void judge(){
-		comhand = Random.Range(STONE,PAPER+1);
+		Debug.Log ("hand:"+myhand);
+		comhand = UnityEngine.Random.Range(STONE,PAPER+1);
 		//comの手を決める上の場合ランダム
 		
 		if(myhand == comhand){
@@ -81,30 +130,62 @@ public class stratjanken : MonoBehaviour {
 			switch(comhand){
 			case STONE:
 				if(myhand == PAPER){
-					flgResult = LOOSE;
+					if(stamina <= 0){
+						flgResult = LOOSE;
+					}
 				}
 				break;
 				
 			case SCISSORS:
 				if(myhand == STONE){
-					flgResult = LOOSE;
+					if(stamina <= 0){
+						flgResult = LOOSE;
+					}
 				}
 				break;
 				
 			case PAPER:
 				if(myhand == SCISSORS){
-					flgResult = LOOSE;
+					stamina = stamina - cpuPower;
+					if(stamina <= 0){
+						flgResult = LOOSE;
+					}
 				}
 				break;
 			}
 			
 			if(flgResult != LOOSE){
-				flgResult = WIN;
+				cpuStamina = cpuStamina - power;
+				if(cpuStamina <= 0){
+					flgResult = WIN;
+				}
 			}
 		}
-		Debug.Log(flgResult);
+
+		Debug.Log("anser"+flgResult);
+		totaltime = 10;
 	}
 
+
+	//load
+	public int LoadWeight(){
+		Debug.Log ("Load");
+		return PlayerPrefs.GetInt(WEIGHT, -1);
+	}
+	public int LoadPower(){
+		Debug.Log ("Load");
+		return PlayerPrefs.GetInt(POWER, -1);
+	}
+	public int LoadStamina(){
+		Debug.Log ("Load");
+		return PlayerPrefs.GetInt(STAMINA, -1);
+	}
+	public int LoadMoney(){
+		Debug.Log ("Load");
+		return PlayerPrefs.GetInt(MONEY, -1);
+	}
+	/*void backButtun(){
+	}*/
 	/*void Update(){
 	if (flgJanken == true) {
 		switch (modeJanken) {

@@ -133,16 +133,20 @@ public class clickGrowStartButton : MonoBehaviour {
 	}
 
 	//load
-	int LoadWeight(){
+	public int LoadWeight(){
+		Debug.Log ("Load");
 		return PlayerPrefs.GetInt(WEIGHT, -1);
 	}
-	int LoadPower(){
+	public int LoadPower(){
+		Debug.Log ("Load");
 		return PlayerPrefs.GetInt(POWER, -1);
 	}
-	int LoadStamina(){
+	public int LoadStamina(){
+		Debug.Log ("Load");
 		return PlayerPrefs.GetInt(STAMINA, -1);
 	}
-	int LoadMoney(){
+	public int LoadMoney(){
+		Debug.Log ("Load");
 		return PlayerPrefs.GetInt(MONEY, -1);
 	}
 

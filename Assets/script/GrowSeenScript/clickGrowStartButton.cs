@@ -19,10 +19,10 @@ public class clickGrowStartButton : MonoBehaviour {
 	int money;
 
 	//テクストオブジェクトを生成
-	public Text staminaText,powerText,weightText,moneyText;
+	public Text staminaText,powerText,weightText,moneyText,moneyJudgeText;
 
 	//ゲームオブジェクトを作成
-	public GameObject growButton,clickStompButton,eatCauldronButton,blockTrackButton,backButtom;
+	public GameObject growButton,clickStompButton,eatCauldronButton,blockTrackButton,backButtom,judgeBox;
 
 	void Start(){
 		//gameprefsからデータをロード
@@ -43,7 +43,7 @@ public class clickGrowStartButton : MonoBehaviour {
 		}
 
 		if (stamina == -1) {
-			stamina =10;
+			stamina = 100;
 			SaveStamina(stamina);
 		}
 
@@ -51,33 +51,6 @@ public class clickGrowStartButton : MonoBehaviour {
 			money = 100;
 			SaveMoney(money);
 		}
-
-		/*try{
-			power = LoadPower();
-			Debug.Log ("load power:"+power);
-			
-		}catch(NullReferenceException){
-			power = 5;
-			
-		}
-
-		try{
-			stamina = LoadStamina();
-			Debug.Log ("load stamina:"+stamina);
-
-		}catch(NullReferenceException){
-			stamina = 3;
-			
-		}
-
-		try{
-			money = LoadMoney();
-			Debug.Log ("load money:"+money);
-			
-		}catch(NullReferenceException){
-			money = 1;
-
-		}*/
 
 		//ステータスを表示
 		weightText.text = "重さ："+weight.ToString ();
@@ -89,28 +62,11 @@ public class clickGrowStartButton : MonoBehaviour {
 
 
 	public void clickGrowButton(){
-
 		//育成ボタンを押したら各練習のボタンを表示
 		growButton.SetActive (false);
 		clickStompButton.SetActive(true);
 		eatCauldronButton.SetActive(true);
 		blockTrackButton.SetActive(true);
-		
-		//CHECK
-
-		/*SavePower(++power);
-		power = LoadPower ();
-		Debug.Log("up power:"+power);
-
-		SaveStamina(++stamina);
-		stamina = LoadStamina ();
-		Debug.Log("up stamina:"+stamina);
-
-
-		SaveMoney(++money);
-		money = LoadMoney ();
-		Debug.Log("up money:"+money);
-		*/
 	}
 
 	//save
@@ -118,7 +74,6 @@ public class clickGrowStartButton : MonoBehaviour {
 		PlayerPrefs.SetInt(WEIGHT, weight);
 		PlayerPrefs.Save();
 	}
-
 	void SavePower(int power){
 		PlayerPrefs.SetInt(POWER, power);
 		PlayerPrefs.Save();
@@ -152,22 +107,46 @@ public class clickGrowStartButton : MonoBehaviour {
 
 	//四股ボタンが押されたら
 	public void GrowStompButton(){
-		Application.LoadLevel (3);
+		if (money >= (100 * stamina) / 10) {
+			money = money - (100 * stamina) / 10;
+			SaveMoney(money);
+			Application.LoadLevel (3);
+		} else {
+			judgeBox.SetActive(true);
+		}
 	}
 
 	//トラックを止めるボタンが押されたら
 	public void GrowStopTrackButton(){
-		Application.LoadLevel (2);
+		if(money >= (100 * power)/10){
+			money = money - (100 * power)/10;
+			SaveMoney(money);
+			Application.LoadLevel (2);
+		} else {
+			judgeBox.SetActive(true);
+		}
 	}
 
 	//ちゃんこ鍋ボタンが押されたら
 	public void GrowEatChankonabe(){
-		Application.LoadLevel (1);
+
+		if(money >= (100 * weight)/10){
+			money = money - (100 * weight)/10;
+			SaveMoney(money);
+			Application.LoadLevel (1);
+		} else {
+			judgeBox.SetActive(true);
+		}
+
 	}
 	
 	//ホーム画面に戻る
 	public void backHomeButton(){
-		
+		SaveWeight(weight);
+		SavePower(power);
+		SaveStamina(stamina);
+		SaveMoney(money);
+		Application.LoadLevel ("gameMainSeen");
 	}
 	
 	//練習画面に戻る
@@ -176,6 +155,7 @@ public class clickGrowStartButton : MonoBehaviour {
 		clickStompButton.SetActive(false);
 		eatCauldronButton.SetActive(false);
 		blockTrackButton.SetActive(false);
+		judgeBox.SetActive(false);
 	}
 
 	//データを全部初期化
@@ -184,25 +164,4 @@ public class clickGrowStartButton : MonoBehaviour {
 		Debug.Log ("Delete complete");
 	}
 
-	/*void Start () {
-		TextAsset json = Resources.Load("JSON/Sample") as TextAsset;
-		Person person = JsonMapper.ToObject<Person>(json.text);
-		person.power++;
-		Debug.Log(person.name);
-		Debug.Log(person.power);
-		Debug.Log(person.weight);
-		Debug.Log(person.stamina);
-	}*/
-
 }
-/*
-public class Person {
-	public string name;
-	public int power;
-	public double weight;
-	public int stamina;
-}
-
-public class Save{
-}
-*/

@@ -4,17 +4,25 @@ using System.Collections;
 using UnityEngine.UI;
 	
 public class stratjanken : MonoBehaviour {
+
+	//text create
 	public Text timetext,hpText,cpuHpText;
+
+	//GameObj create
+	public GameObject startjankenobj,endGameObj,continueObj;
+
+	//hensuu create
 	public double gettime , totaltime;	
 	public bool flgJanken;
-	//teisuu
+
+	//teisuu create
 	const String WEIGHT = "WEIGHT";
 	const String POWER = "POWER";
 	const String STAMINA = "STAMINA";
 	const String MONEY = "MONEY";
+	const String STAGELEVEL = "STAGELEVEL";
 
-	public GameObject startjankenobj;
-		
+	//judge and hand
 	const int JANKEN = 0; //constはfinalと一緒
 	const int SCISSORS = 1;
 	const int STONE = 2;
@@ -23,14 +31,21 @@ public class stratjanken : MonoBehaviour {
 	const int WIN = 5;
 	const int LOOSE = 6;
 		
+	//myhand
 	public int myhand;
-	int comhand;
+
+	//cpuhand
+	public int comhand;
+
+	//get Stage
+	public int getStage;
+
 	//myStatus
 	int weight;
 	int power;
 	int stamina;
 	int money;
-	//
+	//cpuStatus
 	int cpuWeight;
 	int cpuPower;
 	int cpuStamina;
@@ -40,7 +55,6 @@ public class stratjanken : MonoBehaviour {
 
 	public void Start(){
 		flgJanken = true;
-		//clickGrowStartButton getStatus = GetComponent<clickGrowStartButton> ();
 		//gameprefsからデータをロード
 		stamina = LoadStamina();
 		power  = LoadPower();
@@ -51,24 +65,27 @@ public class stratjanken : MonoBehaviour {
 		Debug.Log ("Power:" + power);
 		Debug.Log ("Money:" + money);
 
+		//ステージをロード
+		getStage = LoadStageLevel ();
 
 
-		//
+
+		//敵のステータス取得
 		kindRikishi rikishi = new kindRikishi ();
-		cpuWeight = rikishi.Weight ();
-		cpuPower = rikishi.Power();
-		cpuStamina = rikishi.Stamina ();
-		cpuMoney = rikishi.Money ();
+		cpuWeight = rikishi.Weight (getStage);
+		cpuPower = rikishi.Power(getStage);
+		cpuStamina = rikishi.Stamina (getStage);
+		cpuMoney = rikishi.Money (getStage);
 		Debug.Log ("cpuWeight:"+cpuWeight);
 		Debug.Log ("cpuPower:"+cpuPower);
 		Debug.Log ("cpuStamina:"+cpuStamina);
 		Debug.Log ("cpuMoney:"+cpuMoney);
 
-		//
+		//HP表示
 		hpText.text = "自分のHP："+stamina.ToString ();
 		cpuHpText.text = "相手のHP："+cpuStamina.ToString ();
 
-		//
+		//制限時間を入れる
 		totaltime = 10;
 	}
 
@@ -95,7 +112,7 @@ public class stratjanken : MonoBehaviour {
 		flgJanken = true;
 	}
 		
-	
+	//
 	public void stonebutton(){
 		if (flgJanken == true) {
 			myhand = STONE;
@@ -103,7 +120,7 @@ public class stratjanken : MonoBehaviour {
 		}
 	}
 
-	
+	//
 	public void paperbutton(){
 		if (flgJanken == true) {
 			myhand = PAPER;
@@ -111,7 +128,7 @@ public class stratjanken : MonoBehaviour {
 		}
 	}
 
-	
+	//
 	public void scissorsbutton(){
 		if (flgJanken == true) {
 			myhand = SCISSORS;
@@ -119,53 +136,98 @@ public class stratjanken : MonoBehaviour {
 		}
 	}
 
+	//じゃんけんの判定をする
 	void judge(){
-		Debug.Log ("hand:"+myhand);
-		comhand = UnityEngine.Random.Range(STONE,PAPER+1);
+
+		comhand = UnityEngine.Random.Range(SCISSORS,PAPER+1);
 		//comの手を決める上の場合ランダム
-		
+		Debug.Log ("hand:"+myhand);
+		Debug.Log ("cpuhand:"+comhand);
+
+		//draw judge
 		if(myhand == comhand){
 			flgResult = DRAW;
 		}else{
-			switch(comhand){
-			case STONE:
-				if(myhand == PAPER){
-					if(stamina <= 0){
-						flgResult = LOOSE;
-					}
+			//loose judge
+			if(myhand == STONE && comhand == PAPER){
+				stamina = stamina - cpuPower;
+				if(stamina <= 0){
+					flgResult = LOOSE;
+					endGameObj.SetActive(true);
+					continueObj.SetActive(true);
 				}
-				break;
-				
-			case SCISSORS:
-				if(myhand == STONE){
-					if(stamina <= 0){
-						flgResult = LOOSE;
-					}
+				flgResult = LOOSE;
+			}else	if(myhand == SCISSORS && comhand == STONE){
+				stamina = stamina - cpuPower;
+				if(stamina <= 0){
+					flgResult = LOOSE;
+					endGameObj.SetActive(true);
+					continueObj.SetActive(true);
 				}
-				break;
-				
-			case PAPER:
-				if(myhand == SCISSORS){
-					stamina = stamina - cpuPower;
-					if(stamina <= 0){
-						flgResult = LOOSE;
-					}
+				flgResult = LOOSE;
+			}else	if(myhand == PAPER && comhand == SCISSORS){
+				stamina = stamina - cpuPower;
+				if(stamina <= 0){
+					flgResult = LOOSE;
+					endGameObj.SetActive(true);
+					continueObj.SetActive(true);
 				}
-				break;
-			}
-			
-			if(flgResult != LOOSE){
+				flgResult = LOOSE;
+			}else{
+				//win judge
+				//damage
 				cpuStamina = cpuStamina - power;
 				if(cpuStamina <= 0){
+					endGameObj.SetActive(true);
 					flgResult = WIN;
+					money = money + cpuMoney;
+					SaveMoney(money);
 				}
+				flgResult = WIN;
 			}
 		}
-
-		Debug.Log("anser"+flgResult);
+		Debug.Log("anser:"+flgResult);
 		totaltime = 10;
+		flgJanken = true;
 	}
 
+	//continue
+	public void continueButton(){
+		flgJanken = true;
+		//clickGrowStartButton getStatus = GetComponent<clickGrowStartButton> ();
+		//gameprefsからデータをロード
+		stamina = LoadStamina();
+		power  = LoadPower();
+		weight = LoadWeight();
+		money = LoadMoney();
+		Debug.Log ("Weight:" + weight);
+		Debug.Log ("Stamina:" + stamina);
+		Debug.Log ("Power:" + power);
+		Debug.Log ("Money:" + money);
+		
+		
+		
+		//敵のステータス取得
+		kindRikishi rikishi = new kindRikishi ();
+		cpuWeight = rikishi.Weight (getStage);
+		cpuPower = rikishi.Power(getStage);
+		cpuStamina = rikishi.Stamina (getStage);
+		cpuMoney = rikishi.Money (getStage);
+		Debug.Log ("cpuWeight:"+cpuWeight);
+		Debug.Log ("cpuPower:"+cpuPower);
+		Debug.Log ("cpuStamina:"+cpuStamina);
+		Debug.Log ("cpuMoney:"+cpuMoney);
+		
+		//HP表示
+		hpText.text = "自分のHP："+stamina.ToString ();
+		cpuHpText.text = "相手のHP："+cpuStamina.ToString ();
+		
+		//制限時間をいれる
+		totaltime = 10;
+
+		endGameObj.SetActive(false);
+		continueObj.SetActive(false);
+	}
 
 	//load
 	public int LoadWeight(){
@@ -184,77 +246,15 @@ public class stratjanken : MonoBehaviour {
 		Debug.Log ("Load");
 		return PlayerPrefs.GetInt(MONEY, -1);
 	}
-	/*void backButtun(){
-	}*/
-	/*void Update(){
-	if (flgJanken == true) {
-		switch (modeJanken) {
-		case 0: //じゃんけん開始
-			modeJanken++;
-			break;
+	//select Load Stage 
+	public int LoadStageLevel(){
+		Debug.Log ("Load");
+		return PlayerPrefs.GetInt(STAGELEVEL, -1);
+	}
 
-		case 1: //プレイヤー入力待ち
-			if(modeJanken == 1){
-				//もしぐーボタンが押されたら
-				myhand = STONE;
-				modeJanken++;
-
-				//もしぱーボタンが押されたら
-				myhand = PAPER;
-				modeJanken++;
-
-				//もしちょきボタンが押されたら
-				myhand = SCISSORS;
-				modeJanken++;
-			}
-			break;
-
-		case 2: //判定
-			comhand = Random.Range(STONE,PAPER+1);
-			//comの手を決める上の場合ランダム
-
-			if(myhand == comhand){
-				flgResult = DRAW;
-			}else{
-				switch(comhand){
-				case STONE:
-					if(myhand == PAPER){
-						flgResult = LOOSE;
-					}
-					break;
-
-				case SCISSORS:
-					if(myhand == STONE){
-						flgResult = LOOSE;
-					}
-					break;
-						
-				case PAPER:
-					if(myhand == SCISSORS){
-						flgResult = LOOSE;
-					}
-					break;
-				}
-
-				if(flgResult != LOOSE){
-					flgResult = WIN;
-				}
-			}
-			modeJanken++;
-			break;
-
-			case 3: //結果
-
-
-
-				modeJanken++;
-				break;
-			
-			case 4: //じゃんけん終了
-				flgJanken = false;
-				modeJanken = 0;
-				break;
-			}
-		}
-	}*/
+	//save
+	void SaveMoney(int money){
+		PlayerPrefs.SetInt(MONEY, money);
+		PlayerPrefs.Save();
+	}
 }

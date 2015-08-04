@@ -62,7 +62,7 @@ public class kindRikishi : Rikishi {
 		if (patternRikishi == 3) {
 			return 75;
 		}
-		if (patternRikishi == 2) {
+		if (patternRikishi == 4) {
 			return 150;
 		}
 		return 0;

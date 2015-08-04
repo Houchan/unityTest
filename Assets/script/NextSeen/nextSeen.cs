@@ -15,6 +15,10 @@ public class nextSeen : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	//ボタンを押した時の音（できれば和風チック）
+	//save,loadメソッド以外のメソッドに音を追加
+
 	//稽古ボタンが押されたら稽古シーンに繊維
 	public void nextPracticeSeen(){
 		Application.LoadLevel ("practiseSeen");

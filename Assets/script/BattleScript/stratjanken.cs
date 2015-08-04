@@ -12,7 +12,7 @@ public class stratjanken : MonoBehaviour {
 	public GameObject startjankenobj,endGameObj,continueObj;
 
 	//hensuu create
-	public double gettime , totaltime;	
+	public double gettime,totaltime;	
 	public bool flgJanken;
 
 	//teisuu create
@@ -113,6 +113,9 @@ public class stratjanken : MonoBehaviour {
 		
 	//
 	public void stonebutton(){
+
+		//ボタンを押した時の音（できれば和風チック）
+
 		if (flgJanken == true) {
 			myhand = STONE;
 			judge();
@@ -121,6 +124,9 @@ public class stratjanken : MonoBehaviour {
 
 	//
 	public void paperbutton(){
+
+		//ボタンを押した時の音（できれば和風チック）
+
 		if (flgJanken == true) {
 			myhand = PAPER;
 			judge();
@@ -129,6 +135,9 @@ public class stratjanken : MonoBehaviour {
 
 	//
 	public void scissorsbutton(){
+
+		//ボタンを押した時の音（できれば和風チック）
+
 		if (flgJanken == true) {
 			myhand = SCISSORS;
 			judge();
@@ -151,6 +160,7 @@ public class stratjanken : MonoBehaviour {
 			if(myhand == STONE && comhand == PAPER){
 				stamina = stamina - cpuPower;
 				if(stamina <= 0){
+					flgJanken = false;
 					flgResult = LOOSE;
 					endGameObj.SetActive(true);
 					continueObj.SetActive(true);
@@ -160,6 +170,7 @@ public class stratjanken : MonoBehaviour {
 			}else	if(myhand == SCISSORS && comhand == STONE){
 				stamina = stamina - cpuPower;
 				if(stamina <= 0){
+					flgJanken = false;
 					flgResult = LOOSE;
 					endGameObj.SetActive(true);
 					continueObj.SetActive(true);
@@ -169,6 +180,7 @@ public class stratjanken : MonoBehaviour {
 			}else	if(myhand == PAPER && comhand == SCISSORS){
 				stamina = stamina - cpuPower;
 				if(stamina <= 0){
+					flgJanken = false;
 					flgResult = LOOSE;
 					endGameObj.SetActive(true);
 					continueObj.SetActive(true);
@@ -180,6 +192,7 @@ public class stratjanken : MonoBehaviour {
 				//damage
 				cpuStamina = cpuStamina - power;
 				if(cpuStamina <= 0){
+					flgJanken = false;
 					endGameObj.SetActive(true);
 					flgResult = WIN;
 					money = money + cpuMoney;

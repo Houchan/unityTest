@@ -60,8 +60,11 @@ public class clickGrowStartButton : MonoBehaviour {
 
 	}
 
-
+	//クリックボタンが押されたら練習項目のボタンを表示
 	public void clickGrowButton(){
+
+		//ボタンを押した時の音（できれば和風チック）
+
 		//育成ボタンを押したら各練習のボタンを表示
 		growButton.SetActive (false);
 		clickStompButton.SetActive(true);
@@ -107,6 +110,9 @@ public class clickGrowStartButton : MonoBehaviour {
 
 	//四股ボタンが押されたら
 	public void GrowStompButton(){
+
+		//ボタンを押した時の音（できれば和風チック）
+
 		if (money >= (100 * stamina) / 10) {
 			money = money - (100 * stamina) / 10;
 			SaveMoney(money);
@@ -118,6 +124,9 @@ public class clickGrowStartButton : MonoBehaviour {
 
 	//トラックを止めるボタンが押されたら
 	public void GrowStopTrackButton(){
+
+		//ボタンを押した時の音（できれば和風チック）
+
 		if(money >= (100 * power)/10){
 			money = money - (100 * power)/10;
 			SaveMoney(money);
@@ -129,6 +138,8 @@ public class clickGrowStartButton : MonoBehaviour {
 
 	//ちゃんこ鍋ボタンが押されたら
 	public void GrowEatChankonabe(){
+
+		//ボタンを押した時の音（できれば和風チック）
 
 		if(money >= (100 * weight)/10){
 			money = money - (100 * weight)/10;
@@ -142,6 +153,9 @@ public class clickGrowStartButton : MonoBehaviour {
 	
 	//ホーム画面に戻る
 	public void backHomeButton(){
+
+		//ボタンを押した時の音（できれば和風チック）
+
 		SaveWeight(weight);
 		SavePower(power);
 		SaveStamina(stamina);

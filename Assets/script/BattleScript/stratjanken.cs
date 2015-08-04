@@ -95,7 +95,6 @@ public class stratjanken : MonoBehaviour {
 			totaltime = totaltime - gettime;
 			timetext.text = totaltime.ToString ("N0");
 			if(totaltime<=0){
-				flgJanken = false;
 				myhand = STONE;
 				judge();
 			}
@@ -155,6 +154,7 @@ public class stratjanken : MonoBehaviour {
 					flgResult = LOOSE;
 					endGameObj.SetActive(true);
 					continueObj.SetActive(true);
+					flgJanken = false;
 				}
 				flgResult = LOOSE;
 			}else	if(myhand == SCISSORS && comhand == STONE){
@@ -163,6 +163,7 @@ public class stratjanken : MonoBehaviour {
 					flgResult = LOOSE;
 					endGameObj.SetActive(true);
 					continueObj.SetActive(true);
+					flgJanken = false;
 				}
 				flgResult = LOOSE;
 			}else	if(myhand == PAPER && comhand == SCISSORS){
@@ -171,6 +172,7 @@ public class stratjanken : MonoBehaviour {
 					flgResult = LOOSE;
 					endGameObj.SetActive(true);
 					continueObj.SetActive(true);
+					flgJanken = false;
 				}
 				flgResult = LOOSE;
 			}else{
@@ -182,13 +184,13 @@ public class stratjanken : MonoBehaviour {
 					flgResult = WIN;
 					money = money + cpuMoney;
 					SaveMoney(money);
+					flgJanken = false;
 				}
 				flgResult = WIN;
 			}
 		}
 		Debug.Log("anser:"+flgResult);
 		totaltime = 10;
-		flgJanken = true;
 	}
 
 	//continue

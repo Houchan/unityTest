@@ -5,6 +5,6 @@ public class backPracticeMenu : MonoBehaviour {
 
 	// Use this for initialization
 	public void practiseEndButton(){
-		Application.LoadLevel (0);
+		Application.LoadLevel ("practiseSeen");
 	}
 }

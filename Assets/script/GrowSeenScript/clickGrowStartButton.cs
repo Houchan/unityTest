@@ -116,7 +116,7 @@ public class clickGrowStartButton : MonoBehaviour {
 		if (money >= (100 * stamina) / 10) {
 			money = money - (100 * stamina) / 10;
 			SaveMoney(money);
-			Application.LoadLevel (3);
+			Application.LoadLevel ("practiseStompSeen");
 		} else {
 			judgeBox.SetActive(true);
 		}
@@ -130,7 +130,7 @@ public class clickGrowStartButton : MonoBehaviour {
 		if(money >= (100 * power)/10){
 			money = money - (100 * power)/10;
 			SaveMoney(money);
-			Application.LoadLevel (2);
+			Application.LoadLevel ("practiseStopTrackSeen");
 		} else {
 			judgeBox.SetActive(true);
 		}
@@ -144,7 +144,7 @@ public class clickGrowStartButton : MonoBehaviour {
 		if(money >= (100 * weight)/10){
 			money = money - (100 * weight)/10;
 			SaveMoney(money);
-			Application.LoadLevel (1);
+			Application.LoadLevel ("practiseEatChankonabeSeen");
 		} else {
 			judgeBox.SetActive(true);
 		}

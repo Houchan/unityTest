@@ -1,0 +1,187 @@
+fileFormatVersion: 2
+guid: 2f4e29cba9e389546a02b8536872a9d3
+timeCreated: 1439349246
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: sikoloop_0
+    21300002: sikoloop_1
+    21300004: sikoloop_2
+    21300006: sikoloop_3
+    21300008: sikoloop_4
+    21300010: sikoloop_5
+    21300012: sikoloop_6
+    21300014: sikoloop_7
+    21300016: sikoloop_8
+    21300018: sikoloop_9
+    21300020: sikoloop_10
+    21300022: sikoloop_11
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: sikoloop_0
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 30
+        width: 798
+        height: 851
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sikoloop_1
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 30
+        width: 797
+        height: 851
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sikoloop_2
+      rect:
+        serializedVersion: 2
+        x: 1686
+        y: 25
+        width: 971
+        height: 878
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sikoloop_3
+      rect:
+        serializedVersion: 2
+        x: 2679
+        y: 25
+        width: 960
+        height: 923
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sikoloop_4
+      rect:
+        serializedVersion: 2
+        x: 3655
+        y: 25
+        width: 883
+        height: 923
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sikoloop_5
+      rect:
+        serializedVersion: 2
+        x: 4560
+        y: 19
+        width: 960
+        height: 923
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sikoloop_6
+      rect:
+        serializedVersion: 2
+        x: 5570
+        y: 30
+        width: 795
+        height: 851
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sikoloop_7
+      rect:
+        serializedVersion: 2
+        x: 6392
+        y: 30
+        width: 795
+        height: 851
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sikoloop_8
+      rect:
+        serializedVersion: 2
+        x: 7220
+        y: 41
+        width: 971
+        height: 878
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sikoloop_9
+      rect:
+        serializedVersion: 2
+        x: 8252
+        y: 19
+        width: 964
+        height: 923
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sikoloop_10
+      rect:
+        serializedVersion: 2
+        x: 9267
+        y: 19
+        width: 883
+        height: 923
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sikoloop_11
+      rect:
+        serializedVersion: 2
+        x: 10205
+        y: 19
+        width: 960
+        height: 923
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

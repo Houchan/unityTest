@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 7f15bef4e18a7d14685a4688ead68c85
-timeCreated: 1439349574
+timeCreated: 1439449508
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -57,22 +57,12 @@ TextureImporter:
     - name: torakku_0
       rect:
         serializedVersion: 2
-        x: 96
-        y: 28
+        x: 98
+        y: 29
         width: 568
         height: 624
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: torakku_1
-      rect:
-        serializedVersion: 2
-        x: 695
-        y: 174
-        width: 5
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: torakku_2
       rect:
@@ -82,7 +72,7 @@ TextureImporter:
         width: 691
         height: 709
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: torakku_3
       rect:
@@ -92,7 +82,7 @@ TextureImporter:
         width: 948
         height: 848
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: torakku_4
       rect:
@@ -102,7 +92,7 @@ TextureImporter:
         width: 874
         height: 932
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

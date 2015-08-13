@@ -160,6 +160,7 @@ public class clickGrowStartButton : MonoBehaviour {
 		SavePower(power);
 		SaveStamina(stamina);
 		SaveMoney(money);
+		Time.timeScale = 1;
 		Application.LoadLevel ("gameMainSeen");
 	}
 	

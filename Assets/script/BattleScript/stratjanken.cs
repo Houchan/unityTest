@@ -54,6 +54,7 @@ public class stratjanken : MonoBehaviour {
 	int flgResult; //勝敗結果を保持
 
 	public void Start(){
+		SoundManager.Instance.PlayBGM(1);
 		flgJanken = true;
 		//gameprefsからデータをロード
 		stamina = LoadStamina();

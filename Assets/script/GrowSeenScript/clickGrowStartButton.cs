@@ -17,9 +17,12 @@ public class clickGrowStartButton : MonoBehaviour {
 	int power;
 	int stamina;
 	int money;
+	int chankoManey;
+	int shikoManey;
+	int trakkuManey;
 
 	//テクストオブジェクトを生成
-	public Text staminaText,powerText,weightText,moneyText,moneyJudgeText;
+	public Text staminaText,powerText,weightText,moneyText,moneyJudgeText,chankoText,shikoText,trakkuText;
 
 	//ゲームオブジェクトを作成
 	public GameObject growButton,clickStompButton,eatCauldronButton,blockTrackButton,backButtom,judgeBox;
@@ -54,7 +57,7 @@ public class clickGrowStartButton : MonoBehaviour {
 
 		//ステータスを表示
 		weightText.text = "重さ："+weight.ToString ();
-		powerText.text = "力："+power.ToString ();
+		powerText.text = "筋力："+power.ToString ();
 		staminaText.text = "スタミナ："+stamina.ToString ();
 		moneyText.text = "所持金："+money.ToString ();
 
@@ -62,6 +65,16 @@ public class clickGrowStartButton : MonoBehaviour {
 
 	//クリックボタンが押されたら練習項目のボタンを表示
 	public void clickGrowButton(){
+
+		SoundManager.Instance.PlaySE(6);
+		//稽古にかかるお金
+		chankoManey = (int)((100 * weight) / 10);
+		shikoManey = (int)((100 * stamina) / 10);
+		trakkuManey = (int)((100 * power) / 10);
+
+		chankoText.text = "ちゃんこ鍋を食べる:" + chankoManey.ToString ();
+		shikoText.text = "四股を踏む:" + shikoManey.ToString ();
+		trakkuText.text = "トラックを止める:" + trakkuManey.ToString ();
 
 		//ボタンを押した時の音（できれば和風チック）
 
@@ -110,7 +123,7 @@ public class clickGrowStartButton : MonoBehaviour {
 
 	//四股ボタンが押されたら
 	public void GrowStompButton(){
-
+		SoundManager.Instance.PlaySE(6);
 		//ボタンを押した時の音（できれば和風チック）
 
 		if (money >= (100 * stamina) / 10) {
@@ -124,7 +137,7 @@ public class clickGrowStartButton : MonoBehaviour {
 
 	//トラックを止めるボタンが押されたら
 	public void GrowStopTrackButton(){
-
+		SoundManager.Instance.PlaySE(6);
 		//ボタンを押した時の音（できれば和風チック）
 
 		if(money >= (100 * power)/10){
@@ -138,7 +151,7 @@ public class clickGrowStartButton : MonoBehaviour {
 
 	//ちゃんこ鍋ボタンが押されたら
 	public void GrowEatChankonabe(){
-
+		SoundManager.Instance.PlaySE(6);
 		//ボタンを押した時の音（できれば和風チック）
 
 		if(money >= (100 * weight)/10){
@@ -153,7 +166,7 @@ public class clickGrowStartButton : MonoBehaviour {
 	
 	//ホーム画面に戻る
 	public void backHomeButton(){
-
+		SoundManager.Instance.PlaySE(7);
 		//ボタンを押した時の音（できれば和風チック）
 
 		SaveWeight(weight);
@@ -166,6 +179,8 @@ public class clickGrowStartButton : MonoBehaviour {
 	
 	//練習画面に戻る
 	public void backMenuButton(){
+		Time.timeScale = 1;
+		SoundManager.Instance.PlaySE(7);
 		growButton.SetActive (true);
 		clickStompButton.SetActive(false);
 		eatCauldronButton.SetActive(false);

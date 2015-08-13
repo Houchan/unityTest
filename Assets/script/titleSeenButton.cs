@@ -17,8 +17,14 @@ public class titleSeenButton : MonoBehaviour {
 	int stamina;
 	int money;
 
+	void Start(){
+		SoundManager.Instance.PlayBGM(2);
+	}
+
 	//はじめからがおされたら
 	public void clickStartButton(){
+		SoundManager.Instance.PlaySE(6);
+		SoundManager.Instance.StopBGM();
 		//最初にゲームを開始する際に初期値を設定
 		weight =70;
 		SaveWeight(weight);
@@ -26,13 +32,15 @@ public class titleSeenButton : MonoBehaviour {
 		SavePower(power);
 		stamina = 100;
 		SaveStamina(stamina);
-		money = 100;
+		money = 1000;
 		SaveMoney(money);
 		Application.LoadLevel ("gameMainSeen");
 	}
 
 	//コンティニューボタンが押されたら
 	public void clickContinueButton(){
+		SoundManager.Instance.PlaySE(6);
+		SoundManager.Instance.StopBGM();
 		Application.LoadLevel ("gameMainSeen");
 	}
 
